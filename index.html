@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuliner Dayok Binatur</title>
+    <link rel="shortcut icon" href="Stiker DAYOK BINATUR BULAT.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: #2c3e50;
+            background-color: grey;
+            overflow-x: hidden;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(1, 19, 46, 0.738);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            padding: 25px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        header .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 40px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #3498db;
+            transition: width 0.3s ease;
+        }
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        nav ul li a:hover {
+            color: #3498db;
+        }
+
+        /* Hero Section with Slider */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .slide.active {
+            opacity: 0.3;
+        }
+        .slide:nth-child(1) {
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiy95mkrbcxeuadHj8aodhzDWSl_AZGUQA3jAHAAAPSN1GH7EysTHhODJWpuCM-6P-1nnccBxE5FkxhaVsYPUUhmtCPlGTz-8W0t9rPsX0WacWeECykkbXAIIvQcVW5bIuBDWxHWb2inLDY2A_q3-T3ddYPC1vN8BOhkhYeGfmHKuJOYyI-OxzI830BbQiS/w640-h426/Dayok%20Binatur%20Buatan%20Asenk%20Lee%20Saragih-HUT%201%20TRIONEL%20AGUERO%20SENIN%2024%20AGUSTUS%202015%20(2).JPG=w704-h469-p-k-no-nu');
+        }
+        .slide:nth-child(2) {
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhP7lq5cbhCjrsbEJNrqvVWTW1wq_iq5cEhpwmxbkg1wGdYCEKOiezVZWyuNDxudLBETsAYlqo4A6gABmUUkF6bHLVGPmvoNfU6O2qdMSuL7NM3CAbbICduwzymDjREom8-kEGwxncfZ1EES7kAAnnoN1hgFRWnWvY5uwF3z8uzFdthV4Ubqcioj-WGTZRS/w640-h426/11.Dayok%20Binatur-Bapa.JPG=w704-h469-p-k-no-nu');
+        }
+        .slide:nth-child(3) {
+            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGdt0BO6TM2Cd4GctoGkl3q4fV-biT7W1BSSPYKKyTPQ6L1S9SiXRxqI9gGD0Oti1_SHBiORgyYXlb3JVX2rt-M6C0E13A6YCsKOZd0RrapEpO5cQGLgHb8L0ZN7ufy-WgN3Jx7g9Y47pL6yR14_OlD7z2QtrPKURl3F62Tq58Qb6WaeYiMaMxiNDVT6QN/w640-h426/Dayok%20Binatur-Hutaimbaru-HUT%20Lamhot%204%20Jan%202009-Buatan%20St%20Berlin%20Manihuruk-Hutaimbaru%20Simalungun.JPG=w704-h469-p-k-no-nu');
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 24px;
+            padding: 15px 20px;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s ease, transform 0.3s ease;
+            border-radius: 50%;
+            color: #000000;
+        }
+        .prev:hover, .next:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .prev {
+            left: 20px;
+        }
+        .next {
+            right: 20px;
+        }
+        .dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 10;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .dot.active {
+            background-color: #fff;
+        }
+        .hero-content {
+            text-align: center;
+            max-width: 700px;
+            padding: 40px;
+            background-color: none;
+            border-radius: 20px;
+            box-shadow: none;
+            backdrop-filter: none;
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: #ffffff;
+            font-weight: 400;
+        }
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #131931, #000000);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Product Section */
+        .product {
+            padding: 120px 60px;
+            background-color: #fff;
+            text-align: center;
+        }
+        .product h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            transition: transform 0.3s ease;
+        }
+        .product img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Product Gallery Grid */
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .product-gallery img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .product p {
+            font-size: 20px;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+        .feature {
+            flex: 1;
+            min-width: 250px;
+            margin: 25px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        .feature h3 {
+            font-size: 26px;
+            margin-bottom: 15px;
+            color: #34495e;
+            font-weight: 600;
+        }
+        .feature p {
+            color: #7f8c8d;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: #ecf0f1;
+            text-align: center;
+            padding: 30px;
+        }
+        footer p {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .price {
+    margin-top: 40px;
+    text-align: center;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.price h3 {
+    font-size: 36px;
+    color: #000;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #451c01, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.price p {
+    font-size: 16px;
+    color: #000000;
+    font-weight: 400;
+}
+
+.brand-logo {
+    margin: 25px 0 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand-logo img {
+    width: 100px;
+    height: auto;
+    opacity: 0.9;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.brand-logo img:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.team-name {
+    text-align: center;
+    font-size: 14px;
+    color: #222;  /* warna teks netral */
+    margin-bottom: 15px;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 0.5px;
+    background: none !important; /* hapus semua latar */
+}
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 20px 30px;
+            }
+            nav ul li {
+                margin-left: 20px;
+            }
+            .hero h1 {
+                font-size: 40px;
+            }
+            .hero p {
+                font-size: 18px;
+            }
+            .hero-content {
+                padding: 30px;
+            }
+            .product {
+                padding: 80px 30px;
+            }
+            .product h2 {
+                font-size: 32px;
+            }
+            .features {
+                flex-direction: column;
+            }
+            .feature {
+                margin: 15px 0;
+            }
+            .prev, .next {
+                font-size: 20px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Kuliner Dayok Binatur</div>
+        <nav>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#product">Product</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="slider">
+            <div class="slide active"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        <button class="prev">&lt;</button>
+        <button class="next">&gt;</button>
+        <div class="dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+        </div>
+        <div class="hero-content">
+            <h1>Dayok Binatur</h1>
+            <p>Dayok Binatur adalah makanan khas Simalungun berupa ayam kampung yang dimasak dengan bumbu khas lalu disusun kembali sesuai bentuk utuhnya. Hidangan ini memiliki makna filosofis sebagai simbol keteraturan, doa, dan harapan baik dalam upacara adat masyarakat Simalungun.</p>
+            <a href="#product" class="btn">Lihat Produk</a>
+        </div>
+    </section>
+
+    <section id="product" class="product">
+    <h2>Dayok Binatur Kami</h2>
+
+    <!-- Foto utama -->
+    <img src="DSC_0050.jpg" alt="">
+    <p>Kami menerima pesanan kuliner Khas Adat Simalungun Dayok Binatur di Kota Jambi. Pemesanan lebih awal lebih baik sehingga bisa disiapkan tepat waktu.
+</p>
+
+    <!-- Galeri foto 7 gambar -->
+    <div class="product-gallery">
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixj2ZFF9oZH4MupezDDJ9ErDBF9KNtAFz8PHMby8WMqz-1aT_f0rfH2T4TdyOmRjxpm5AyHPTgsEOTJsbZxtgeelm8b-AX3TnsuDuUU4F4CUIoKhVlzIj5P9TNWr-ITdEJbVDYgAK2iUvdukCLXPkqro28r-2um-OMYmN93qDUn67gdbON2QjTon_wRg6x/w640-h360/Panggang%20Dayok%20Binatur%20Hadir%20di%20Kota%20Jambi%20Cita%20Rasa%20Tradisi%20Batak%20Simalungun%20yang%20Menggugah%20Selera%20(11).jpg=w704-h396-p-k-no-nu" target="_blank">
+        <img src="Panggang Dayok Binatur Hadir di Kota Jambi Cita Rasa Tradisi Batak Simalungun yang Menggugah Selera (11).jpg" alt="">
+    </a>
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj8IWjzPZycSigkvmihK4iMIXJWgimR2zbTG3UG7WTHEL2yXr1O-rr7NsVH-nuIOAEznsTHITXTCDEifkVxZeHE2O1PaZj9gAFHYhVzuARblcu53nT5O8K2gza7V1y9HokhRssGtqFvL7hJVl5cvD8-b4bbVpqfkOVDh4FJFGKb-dfZWn5rupeIEGiOA7Qn/w360-h640/Panggang%20Dayok%20Binatur%20Hadir%20di%20Kota%20Jambi%20Cita%20Rasa%20Tradisi%20Batak%20Simalungun%20yang%20Menggugah%20Selera%20(9).jpg=w396-h704-p-k-no-nu" target="_blank">
+        <img src="Panggang Dayok Binatur Hadir di Kota Jambi Cita Rasa Tradisi Batak Simalungun yang Menggugah Selera (9).jpg" alt="">
+    </a>
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwnnPSLKp3Szz5VWXqHj78vdNtLxl9R8DCGIKRACWwQF07vXaID6SLAjVMvE7u4URYD0BlYydC3yng6yxhhFvxNhJPaJZyMafQf9c_cGdr7wW6Wxg2QHyMHqkOOCx98QnLW2EBQSmjDdm3Gd6QcGKPEQ3HovQymFgTVt9_22K7z60sx0gzz848BxbDWQjS/w640-h426/Panggang%20Dayok%20Binatur%20Made%20In%20Lisbet%20Sinaga%20(1).jpg=w704-h470-p-k-no-nu" target="_blank">
+        <img src="Panggang Dayok Binatur Made In Lisbet Sinaga (1).jpg" alt="">
+    </a>
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibHCAfuiKNGO5CsFF3gcdfY7ov-4xZkQhpD9VSy8HIU3Tlu15YD78LRbDLS5g8xa3gxsvzQERf3OVCRQl-0gUGt0r42SmSFWgtiSCmW10ezU0TSZDesy0Nev7onla9qGn6LkBEQ4rqZQBLUQXCo13Mie650pVwNlLkfTJSDHr4C7V68sXiYNihx3PGCLpq/w640-h426/Panggang%20Dayok%20Binatur%20Made%20In%20Lisbet%20Sinaga%20(1a).png=w704-h470-p-k-no-nu" target="_blank">
+        <img src="Panggang Dayok Binatur Made In Lisbet Sinaga (1a).png" alt="">
+    </a>
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjpmu3qK2mIJRv-W8BFKO3TEy0FWYsD4ImZK4LkKjtMFgwFWOxresGnsUxFtQcLxMMuG68kMML5Goc-k69qxwTyNYwbFUOa3TqSGWvkt4ZLn4aXl8bJ0p7jEDb_gK_KoEFvebf4G9wkdfPNJECVkFwa-XjKpFklDpGMPI317jD4l5yFdpzAtQn_WrG1CnUC/w640-h426/Panggang%20Dayok%20Binatur%20Made%20In%20Lisbet%20Sinaga%20(2).jpg=w704-h470-p-k-no-nu" target="_blank">
+        <img src="Panggang Dayok Binatur Made In Lisbet Sinaga (2).jpg" alt="">
+    </a>
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhjzhzr1Ja3xbn3G5fEiye7rDTZ2AMlNffBZsVSXN8mOpNAfngLwLtFAFr5GhjDBxjs96788vIEinrsFuzam2KgWZpurghfIXNN9WIZFTkpGJzUQov8E7FlMuGKO6r7Wg4I3NeyPVY4D0qX-JV4Y9olfPMSuGXldRnRgbHLrdZV0BtgkA_puzS03NSOlagd/w640-h426/Panggang%20Dayok%20Binatur%20Made%20In%20Lisbet%20Sinaga%20(3).jpg=w704-h470-p-k-no-nu                     " target="_blank">
+        <img src="Panggang Dayok Binatur Made In Lisbet Sinaga (3).jpg" alt="">
+    </a>
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg8qeFYcoTQN5VO4qHm40TpphA55zkAVVjnlumtxBZ2k5-pOKS5ZAWe-8PvTnO9faxzV-mbjsEoDNPuwB8JjCDsY_n0OODo4N8n2uivGtsakLw20zQquCnNw8WEJgK4rFQlq5s1yQXkFI0QC5gKLSqpxv_Ktn2KO8yLv96782WsbP5BStQUsvI7gbgfZLxH/w640-h426/Panggang%20Dayok%20Binatur%20Made%20In%20Lisbet%20Sinaga%20(4).jpg=w704-h470-p-k-no-nu" target="_blank">
+        <img src="Panggang Dayok Binatur Made In Lisbet Sinaga (4).jpg" alt="">
+    </a>
+    <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjGdt0BO6TM2Cd4GctoGkl3q4fV-biT7W1BSSPYKKyTPQ6L1S9SiXRxqI9gGD0Oti1_SHBiORgyYXlb3JVX2rt-M6C0E13A6YCsKOZd0RrapEpO5cQGLgHb8L0ZN7ufy-WgN3Jx7g9Y47pL6yR14_OlD7z2QtrPKURl3F62Tq58Qb6WaeYiMaMxiNDVT6QN/w640-h426/Dayok%20Binatur-Hutaimbaru-HUT%20Lamhot%204%20Jan%202009-Buatan%20St%20Berlin%20Manihuruk-Hutaimbaru%20Simalungun.JPG=w704-h469-p-k-no-nu" target="_blank">
+        <img src="Dayok Binatur-Hutaimbaru-HUT Lamhot 4 Jan 2009-Buatan St Berlin Manihuruk-Hutaimbaru Simalungun.JPG" alt="">
+    </a>
+</div>
+
+       <div class="features">
+        <div class="feature">
+            <h3>Rasa Khas Rempah Daerah</h3>
+            <p>Bahan Bumbu terbuat dari rempah tradisional.</p>
+        </div>
+        <div class="feature">
+            <h3>Kuliner Khas Simalungun</h3>
+            <p>Cocok disajikan pada acara syukuran ulang tahun, dan acara sukacita lainnya. Juga bisa untuk acara adat dukacita.</p>
+        </div>
+        <div class="feature">
+            <h3>Harga Terjangkau</h3>
+            <p>Satu Porsi Panggang Dayok Binatur bisa untuk makan 1-5 orang.</p>
+        </div>
+    </div>
+
+    <div class="price">
+        <h3>Rp 200.000</h3>
+        <p>Kota Jambi, Buruan Pesan Sekarang!</p>
+    </div>
+
+    <a href="https://wa.me/qr/OUFCYWU4KWAYO1" target="_blank" class="btn">Pesan Sekarang</a>
+    <div class="brand-logo">
+    <img src="Stiker DAYOK BINATUR BULAT.png" alt="Logo Dayok Binatur">
+    </div>
+    <div class="team-name">
+    <p> Made By Lisbet Sinaga dan Asenk Lee Saragih
+    </p>
+</div>
+</section>
+
+
+
+    <footer id="contact">
+        <p>&copy; 2026 Panggang Dayok Binatur. Jln. Sumatera, Lrg. Bersama, RT 15, Bedeng 6, No 45, Kel. Kebun Handil, Kec. Jelutung, Kota Jambi. Contact us rosenmanmanihuruk@gmail.com</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Slider functionality
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        let currentSlide = 0;
+        let slideInterval = setInterval(nextSlide, 4000); // Auto slide every 4 seconds
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 4000);
+        }
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetInterval();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetInterval();
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+                resetInterval();
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature').forEach(feature => {
+            feature.style.opacity = '0';
+            feature.style.transform = 'translateY(30px)';
+            feature.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(feature);
+        });
+    </script>
+</body>
+</html>
